@@ -1,8 +1,14 @@
 const redux = require("redux");
 
-const counterReducer = (state = { counter: 20 }, action) => {
+const counterReducer = (state = { counter: 0 }, action) => {
+  if (action.type === "increment") {
+    return { counter: state.counter + 2 };
+  }
+  if (action.type === "decrement") {
+    return { counter: state.counter - 2 };
+  }
   return {
-    counter: state.counter - 5,
+    counter: state.counter,
   };
 };
 
@@ -15,4 +21,5 @@ const counterSubcriber = () => {
 
 store.subscribe(counterSubcriber);
 
+store.dispatch({ type: "increment" });
 store.dispatch({ type: "decrement" });
